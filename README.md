@@ -93,7 +93,7 @@ Supports upload and management of:
 ## ⚙️ Installation & Setup
 
 ### Step 1: Clone Repository
-git clone https://github.com/shreydev07/LandSphere.git
+git clone https://github.com/shreydev07/LandSphere-RealEstate-Management-System.git
 cd LandSphere
 
 
