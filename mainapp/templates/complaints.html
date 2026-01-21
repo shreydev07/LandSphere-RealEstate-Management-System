@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+{% load static %}
+{% block body %}
+
+<!-- Messages Section -->
+
+
+<!-- Enquirys Header -->
+<div class="py-5 text-white text-center" style="background-image: url('{% static 'images/Enquirys-banner.jpg' %}'); background-size: cover; background-position: center;">
+  <div class="container">
+    <h1 class="display-4 fw-bold text-dark">Submit a Enquiry</h1>
+    <p class="lead text-dark">We value your feedback and strive to improve your experience</p>
+  </div>
+</div>
+
+<!-- Enquiry Form Section -->
+<div class="container py-5">
+  <div class="row justify-content-center">
+    <div class="col-md-8">
+      <div class="card shadow border-0">
+        <div class="card-body">
+          <h4 class="mb-4 fw-bold text-primary text-center">Raise a Enquiry</h4>
+          <form method="POST" action="{% url 'complaints' %}">
+            {% csrf_token %}
+            
+            <div class="mb-3">
+              <label for="name" class="form-label fw-semibold">Your Name</label>
+              <input type="text" name="name" class="form-control" placeholder="Enter your name" required>
+            </div>
+
+            <div class="mb-3">
+              <label for="email" class="form-label fw-semibold">Email Address</label>
+              <input type="email" name="email" class="form-control" placeholder="Enter your email" required>
+            </div>
+
+            <div class="mb-3">
+              <label for="subject" class="form-label fw-semibold">Subject</label>
+              <input type="text" name="subject" class="form-control" placeholder="Enquiry subject" required>
+            </div>
+
+            <div class="mb-3">
+              <label for="message" class="form-label fw-semibold">Enquiry Description</label>
+              <textarea name="message" class="form-control" rows="5" placeholder="Describe your issue in detail..." required></textarea>
+            </div>
+
+            <div class="d-grid">
+              <button type="submit" class="btn btn-primary btn-lg">Submit Enquiry</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+{% endblock %}

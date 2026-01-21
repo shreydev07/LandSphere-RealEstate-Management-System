@@ -1,0 +1,27 @@
+{% extends 'ownerbase.html' %}
+{% block owner %}
+<div class="container">
+  <h2 class="mt-4 text-center">Pending Properties (Awaiting Approval)</h2>
+  <div class="row mt-3">
+    {% for property in properties %}
+    <div class="col-md-6 col-lg-4 mb-4">
+      <div class="card shadow">
+        <img src="{{ property.images.url }}" class="card-img-top" alt="{{ property.title }}" style="height: 200px; object-fit: cover;">
+        <div class="card-body">
+          <h5 class="card-title">{{ property.title }}</h5>
+          <p class="text-muted">{{ property.location }}</p>
+          <p><strong>Price:</strong> ₹{{ property.price }}</p>
+          <p><span class="badge bg-warning text-dark">Pending Approval</span></p>
+          {% if property.status == 'Rejected' %}
+          <p><span class="badge bg-danger">Rejected</span></p>
+          {% endif %}
+          <p class="text-muted">{{ property.created_at|date:"M d, Y H:i" }}</p>
+        </div>
+      </div>
+    </div>
+    {% empty %}
+    <p class="text-center text-muted">You have no pending properties.</p>
+    {% endfor %}
+  </div>
+</div>
+{% endblock %}

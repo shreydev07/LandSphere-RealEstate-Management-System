@@ -1,0 +1,41 @@
+{% extends 'adminbase.html' %}
+{% block content %}
+<div class="container">
+    <div class="row text-center gy-4 justify-content-center">
+        <div class="col-md-8">
+            <div class="card shadow-lg" style="border-radius: 15px;">
+                <div class="card-body">
+                    <h4 class="mt-3">Owner Complaints</h4>
+                    {% if owner_complaints %}
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Owner Name</th>
+                                    <th>Email</th>
+                                    <th>Complaint</th>
+                                    <th>Date</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for complaint in owner_complaints %}
+                                    <tr>
+                                        <td>{{ complaint.owner_name }}</td>
+                                        <td>{{ complaint.owner_email }}</td>
+                                        <td>{{ complaint.complaint_text }}</td>
+                                        <td>{{ complaint.created_at|date:"d M Y H:i" }}</td>
+                                        <td>
+                                            <a href="{% url 'adminapp:delete_owner_complaint' complaint.id %}" class="btn btn-danger btn-sm">Delete</a>
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    {% else %}
+                        <p>No complaints found.</p>
+                    {% endif %}
+                </div> 
+            </div>
+        </div>
+    </div>
+{% endblock %}

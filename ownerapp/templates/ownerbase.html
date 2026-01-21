@@ -1,0 +1,102 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Owner Dashboard | LandSphere</title>
+    <link rel="stylesheet" href="{% static 'css/owner.css' %}">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            display: flex;
+            min-height: 100vh;
+            font-family: 'Segoe UI', sans-serif;
+        }
+        .sidebar {
+            width: 250px;
+            background: #343a40;
+            color: white;
+            min-height: 100vh;
+            position: fixed;
+            top: 0;
+            left: 0;
+            padding-top: 20px;
+        }
+        .sidebar h3 {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .sidebar a {
+            display: block;
+            padding: 12px 20px;
+            color: white;
+            text-decoration: none;
+        }
+        .sidebar a:hover {
+            background: #495057;
+        }
+        .main-content {
+            margin-left: 250px;
+            padding: 20px;
+            width: 100%;
+        }
+        .topbar {
+            background: rgb(52,58,64);
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="sidebar">
+        <h3>Owner Panel</h3>
+        <a href="{% url 'ownerapp:ownerhome' %}">Dashboard</a>
+        <a href="{% url 'ownerapp:listed_properties' %}">My Listings</a>
+        <a href="{% url 'ownerapp:add_property' %}">Add Property</a>
+        <a href="{% url 'ownerapp:owner_profile' %}">Profile</a>
+        <a href="{% url 'ownerapp:inlisted_properties' %}">Inlisted Properties</a>
+        <a href="{% url 'ownerapp:owner_complaint' %}">Complaints & Feedback</a>
+        <a href="{% url 'ownerapp:change_password' %}">Change Password</a>
+        <a href="{% url 'ownerapp:owner_logout' %}">Logout</a>
+    </div>
+
+    <div class="main-content">
+        <div class="topbar">
+            <h4 class='text-white'>Welcome,  {{owner.name}}</h4>
+             
+            
+        </div>
+
+        <div class="content mt-4">
+
+
+            {% if messages %}
+            <div class="d-flex justify-content-center mt-3">
+              <div style="width: 50%;">
+                {% for message in messages %}
+                  <div class="alert alert-{{ message.tags }} alert-dismissible fade show text-center shadow-sm rounded" role="alert">
+                    {{ message }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                  </div>
+                {% endfor %}
+              </div>
+            </div>
+          {% endif %}
+          
+
+            {% block owner %}{% endblock %}
+        </div>
+    </div>
+
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js" integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq" crossorigin="anonymous"></script>
+
+</body>
+</html>

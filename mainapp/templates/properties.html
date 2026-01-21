@@ -1,0 +1,67 @@
+{% extends "base.html" %}
+{% load static %}
+{% block body %}
+
+<!-- Properties Header -->
+<div class="py-5 text-white text-center" style="background-image: url('{% static 'images/properties-banner.jpg' %}'); background-size: cover; background-position: center;">
+  
+
+<!-- Properties Grid -->
+<div class="container">
+  <h2 class="text-center text-info mb-5">All Properties(View Only)</h2>
+  <div class="row ">
+    <!-- Property Item -->
+    {% for property in properties %}
+    <div class="col-md-6 col-lg-4">
+        <div class="card shadow-lg mb-4">
+            <img src="{{ property.images.url }}" class="card-img-top" alt="Property Image">
+            <div class="card-body">
+                <h5 class="card-title">{{ property.title }}</h5>
+                <p><strong>Location:</strong> {{ property.location }}</p>
+                <p><strong>Price:</strong> ₹{{ property.price }}</p>
+                
+                <div class="text-center mt-3">
+                    <button class="btn btn-outline-secondary" disabled>Login/Register to Book</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% empty %}
+    <p class="text-center mt-4">No approved properties available.</p>
+    {% endfor %}
+    
+  </div>
+</div>
+
+<!-- Pagination -->
+<div class="container text-center py-4">
+  <nav>
+    <ul class="pagination justify-content-center">
+      <li class="page-item {% if not properties.has_previous %}disabled{% endif %}">
+        <a class="page-link" href="?page=1" aria-label="First">
+          <span aria-hidden="true">&laquo;&laquo;</span>
+        </a>
+      </li>
+      <li class="page-item {% if not properties.has_previous %}disabled{% endif %}">
+        <a class="page-link" href="?page={{ properties.previous_page_number }}" aria-label="Previous">
+          <span aria-hidden="true">&laquo;</span>
+        </a>
+      </li>
+      <li class="page-item disabled">
+        <span class="page-link">{{ properties.number }}</span>
+      </li>
+      <li class="page-item {% if not properties.has_next %}disabled{% endif %}">
+        <a class="page-link" href="?page={{ properties.next_page_number }}" aria-label="Next">
+          <span aria-hidden="true">&raquo;</span>
+        </a>
+      </li>
+      <li class="page-item {% if not properties.has_next %}disabled{% endif %}">
+        <a class="page-link" href="?page={{ properties.paginator.num_pages }}" aria-label="Last">
+          <span aria-hidden="true">&raquo;&raquo;</span>
+        </a>
+      </li>
+    </ul>
+  </nav>
+</div>
+
+{% endblock %}

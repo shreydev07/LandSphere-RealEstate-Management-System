@@ -1,0 +1,204 @@
+{% extends "base.html" %}
+{% load static %}
+{% block body %}
+
+<!-- Hero Section -->
+<div class="hero-section main-content" style="background: url('{% static 'images/hero.jpg' %}') no-repeat center center; background-size: cover; height: 80vh;">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12 text-center text-white mt-5">
+        <h1 class="display-4 fw-bold mt-5">Find Your Dream Property</h1>
+        <p class="lead mb-5">Discover the perfect home from our extensive collection of listings across India</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Why Choose Us Section -->
+<div class="bg-light py-5 main-content">
+  <div class="container">
+    <div class="row mb-4">
+      <div class="col-12 text-center">
+        <h2 class="fw-bold">Why Choose LandSphere?</h2>
+        <p class="text-muted">We make property transactions simple and transparent</p>
+      </div>
+    </div>
+
+    <div class="row g-4">
+      <div class="col-md-3 text-center">
+        <div class="p-4 bg-white rounded shadow-sm h-100">
+          <i class="fas fa-home fa-3x text-primary mb-3"></i>
+          <h5>10,000+ Properties</h5>
+          <p class="text-muted">Wide selection across India</p>
+        </div>
+      </div>
+      <div class="col-md-3 text-center">
+        <div class="p-4 bg-white rounded shadow-sm h-100">
+          <i class="fas fa-user-tie fa-3x text-primary mb-3"></i>
+          <h5>Trusted Agents</h5>
+          <p class="text-muted">Verified professionals</p>
+        </div>
+      </div>
+      <div class="col-md-3 text-center">
+        <div class="p-4 bg-white rounded shadow-sm h-100">
+          <i class="fas fa-rupee-sign fa-3x text-primary mb-3"></i>
+          <h5>Best Prices</h5>
+          <p class="text-muted">Competitive market rates</p>
+        </div>
+      </div>
+      <div class="col-md-3 text-center">
+        <div class="p-4 bg-white rounded shadow-sm h-100">
+          <i class="fas fa-headset fa-3x text-primary mb-3"></i>
+          <h5>24/7 Support</h5>
+          <p class="text-muted">Dedicated customer care</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Call to Action -->
+<div class="bg-primary text-white py-5 main-content">
+  <div class="container text-center">
+    <h2 class="fw-bold mb-4">Ready to Find Your Dream Home?</h2>
+    <p class="lead mb-5">Join thousands of satisfied customers who found their perfect property with us</p>
+    <a href="#" class="btn btn-light btn-lg px-4 me-2">Browse Properties</a>
+    <a href="#" class="btn btn-outline-light btn-lg px-4">List Your Property</a>
+  </div>
+</div>
+
+<!-- Floating Chatbot Button -->
+<a href="javascript:void(0);" id="chatbot-btn" title="Chat with us!">
+  <i class="fas fa-robot"></i>
+</a>
+
+<!-- Chatbot Popup -->
+<div id="chatbot-box" class="chatbot-popup shadow">
+  <div class="chatbot-header bg-primary text-white d-flex justify-content-between align-items-center p-2">
+    <span>LandSphere Assistant</span>
+    <button class="btn btn-sm btn-light" id="close-chat">&times;</button>
+  </div>
+  <div class="chatbot-body p-3" id="chatbot-messages">
+    <p><strong>Bot:</strong> Hello! 👋 How can I help you today?</p>
+  </div>
+  <div class="chatbot-input p-2 border-top d-flex">
+    <input type="text" id="chatbot-input" class="form-control me-2" placeholder="Type your message..." />
+    <button id="chatbot-send" class="btn btn-primary">Send</button>
+  </div>
+</div>
+
+<!-- Chatbot CSS -->
+<style>
+#chatbot-btn {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  z-index: 9998;
+  background: #007bff;
+  color: #fff;
+  border-radius: 50%;
+  width: 60px;
+  height: 60px;
+  font-size: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.2);
+  transition: all 0.3s ease;
+}
+#chatbot-btn:hover {
+  background: #0056b3;
+}
+#chatbot-box {
+  position: fixed;
+  bottom: 100px;
+  right: 30px;
+  width: 320px;
+  background: #fff;
+  border-radius: 10px;
+  z-index: 9999;
+  display: none;
+  overflow: hidden;
+  border: 1px solid #ccc;
+  flex-direction: column;
+}
+.chatbot-body {
+  max-height: 280px;
+  overflow-y: auto;
+  font-size: 0.95rem;
+}
+.chatbot-input input {
+  flex-grow: 1;
+}
+.chatbot-message {
+  margin-bottom: 10px;
+}
+.chatbot-message.user {
+  text-align: right;
+  color: #007bff;
+}
+.chatbot-message.bot {
+  text-align: left;
+  color: #000;
+}
+body.chatbot-open .main-content {
+  filter: blur(3px);
+  pointer-events: none;
+  user-select: none;
+}
+</style>
+
+<!-- Chatbot JavaScript -->
+<script>
+document.getElementById('chatbot-btn').addEventListener('click', function () {
+  document.getElementById('chatbot-box').style.display = 'flex';
+  document.body.classList.add('chatbot-open');
+});
+document.getElementById('close-chat').addEventListener('click', function () {
+  document.getElementById('chatbot-box').style.display = 'none';
+  document.body.classList.remove('chatbot-open');
+});
+
+const sendBtn = document.getElementById('chatbot-send');
+const userInput = document.getElementById('chatbot-input');
+const chatWindow = document.getElementById('chatbot-messages');
+
+sendBtn.addEventListener('click', sendMessage);
+userInput.addEventListener('keypress', function (e) {
+  if (e.key === 'Enter') sendMessage();
+});
+
+function sendMessage() {
+  const message = userInput.value.trim();
+  if (message !== '') {
+    appendMessage('user', message);
+    userInput.value = '';
+    fetch("{% url 'chatbot_send' %}", {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'X-CSRFToken': '{{ csrf_token }}'
+      },
+      body: JSON.stringify({ message: message })
+    })
+    .then(response => response.json())
+    .then(data => {
+      appendMessage('bot', data.response);
+    })
+    .catch(error => {
+      appendMessage('bot', 'Sorry, something went wrong.');
+      console.error('Error:', error);
+    });
+  }
+}
+
+function appendMessage(sender, message) {
+  const msg = document.createElement('p');
+  msg.classList.add('chatbot-message', sender);
+  msg.innerHTML = `<strong>${sender === 'user' ? 'You' : 'Bot'}:</strong> ${message}`;
+  chatWindow.appendChild(msg);
+  chatWindow.scrollTop = chatWindow.scrollHeight;
+}
+</script>
+
+{% endblock %}

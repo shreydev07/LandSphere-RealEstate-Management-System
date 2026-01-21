@@ -1,0 +1,20 @@
+{% extends 'seekerbase.html' %}
+{% block seeker %}
+<div class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+      <div class="card shadow-lg p-4 text-center">
+        <img src="{{ seeker.photo.url }}" class="rounded-circle mb-3" alt="Profile Picture" style="width: 150px; height: 150px; object-fit: cover; border: 2px solid #ccc;">
+        <h4 class="card-title">{{ seeker.name }}</h4>
+        <p class="text-muted">Email: {{ seeker.email }}</p>
+        <p class="text-muted">Contact: {{ seeker.contact_no }}</p>
+        <p class="text-muted">Address: {{ seeker.address }}</p>
+        <p class="text-muted">Registered on: {{ seeker.created_at|date:"M d, Y" }}</p>
+        <span class="badge bg-primary">Seeker Profile</span>
+        <div class="mt-3">
+          <a href="{% url 'seekerapp:edit_seeker_profile' %}" class="btn btn-primary border-rounded">Edit Profile</a>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

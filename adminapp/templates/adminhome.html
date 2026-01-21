@@ -1,0 +1,61 @@
+{% extends 'adminbase.html' %}
+{% block content %}
+<h2 class="mb-4">Welcome, Admin</h2>
+
+<div class="row g-4">
+    <div class="col-md-4">
+        <div class="card shadow border-0 text-white" style="background: linear-gradient(to right, #667eea, #764ba2);">
+            <div class="card-body text-center">
+                <h5 class="card-title mt-3">Total Owners</h5>
+                <a href="{% url 'adminapp:approved_owners' %}" class="btn btn-outline-light mt-2">View Owners</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-4">
+        <div class="card shadow border-0 text-white" style="background: linear-gradient(to right, #43cea2, #185a9d);">
+            <div class="card-body text-center">
+                <h5 class="card-title mt-3">Total Seekers</h5>
+                <a href="{% url 'adminapp:approved_seekers' %}" class="btn btn-outline-light mt-2">View Seekers</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-4">
+        <div class="card shadow border-0 text-white" style="background: linear-gradient(to right, #ff512f, #dd2476);">
+            <div class="card-body text-center">
+                <h5 class="card-title mt-3">Listed Properties</h5>
+                <a href="{% url 'adminapp:admin_approved_properties' %}" class="btn btn-outline-light mt-2">View Listings</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-4">
+        <div class="card shadow border-0 text-white" style="background: linear-gradient(to right, #f7971e, #ffd200);">
+            <div class="card-body text-center">
+                <h5 class="card-title mt-3">Pending Approvals</h5>
+                <a href="{% url 'adminapp:pending_approvals' %}" class="btn btn-dark mt-2">Review Now</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-4">
+        <div class="card shadow border-0 text-white" style="background: linear-gradient(to right, #141e30, #243b55);">
+            <div class="card-body text-center">
+                <h5 class="card-title mt-3">Sold Properties</h5>
+                <a href="{% url 'adminapp:sold_properties_list' %}" class="btn btn-outline-light mt-2">View Sold</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card shadow border-0 text-white" style="background: linear-gradient(to right, #141e30, #243b55);">
+            <div class="card-body text-center">
+                <h5 class="card-title mt-3">Properties Listing Request</h5>
+                <a href="{% url 'adminapp:pending_properties' %}" class="btn btn-outline-light mt-2">View Request</a>
+            </div>
+        </div>
+    </div>
+
+
+</div>
+{% endblock %}

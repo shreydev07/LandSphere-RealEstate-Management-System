@@ -1,0 +1,99 @@
+#nav_bg {
+    background-color: rgb(243, 238, 238);
+}
+
+
+  .property-card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  .property-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.1) !important;
+  }
+  .search-box {
+    transform: translateY(20px);
+  }
+  .hero-section {
+    margin-top: -20px; /* Adjust if navbar has margin */
+  }
+
+
+ 
+  
+  
+  .property-card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border-radius: 12px !important;
+  }
+  
+  .property-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1) !important;
+  }
+  
+  .property-image {
+    height: 220px;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+  }
+  
+  .property-card:hover .property-image {
+    transform: scale(1.03);
+  }
+  
+  .property-price-badge {
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    background: rgba(0,0,0,0.7);
+    color: white;
+    padding: 5px 15px;
+    border-radius: 20px;
+    font-weight: bold;
+  }
+  
+  .icon-wrapper {
+    width: 70px;
+    height: 70px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .bg-primary-light {
+    background-color: rgba(13, 110, 253, 0.1);
+  }
+  
+  .shadow-hover {
+    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+  }
+  
+  .feature-card {
+    transition: transform 0.3s ease;
+  }
+  
+  .feature-card:hover {
+    transform: translateY(-8px);
+  }
+
+
+  .card-img-top{
+    max-height: 300px;
+  }
+
+
+  
+  @keyframes slideIn {
+    from { transform: translateY(-50px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+  }
+
+
+
+/*  registraion  */
+
+  
+
+
+ 
+  

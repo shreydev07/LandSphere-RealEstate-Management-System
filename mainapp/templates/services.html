@@ -1,0 +1,95 @@
+{% extends "base.html" %}
+{% load static %}
+{% block body %}
+
+<!-- Services Header -->
+<div class="py-5 text-white text-center" style="background-image: url('{% static 'images/services-banner.png' %}'); background-size: cover; background-position: center;">
+  <div class="container">
+    <h1 class="display-4 fw-bold text-dark">Our Services</h1>
+    <p class="lead text-dark">Discover all the powerful tools and features LandSphere offers</p>
+  </div>
+</div>
+
+<!-- Service Cards -->
+<div class="container py-5">
+  <div class="row g-4">
+
+    <!-- Property Upload -->
+    <div class="col-md-4">
+      <div class="card h-100 shadow-sm border-0">
+        <div class="card-body text-center">
+          <i class="fas fa-upload fa-3x text-primary mb-3"></i>
+          <h5 class="fw-bold">Property Upload</h5>
+          <p class="text-muted">Agents and owners can easily upload, edit, and manage their property listings with images and details.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Property Search -->
+    <div class="col-md-4">
+      <div class="card h-100 shadow-sm border-0">
+        <div class="card-body text-center">
+          <i class="fas fa-search-location fa-3x text-primary mb-3"></i>
+          <h5 class="fw-bold">Advanced Search</h5>
+          <p class="text-muted">Buyers can find properties using powerful filters like location, price, property type, and area size.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Membership System -->
+    <div class="col-md-4">
+      <div class="card h-100 shadow-sm border-0">
+        <div class="card-body text-center">
+          <i class="fas fa-users fa-3x text-primary mb-3"></i>
+          <h5 class="fw-bold">Membership System</h5>
+          <p class="text-muted">Users can register and manage their profiles, view saved properties, and enjoy exclusive member features.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Feedback Collection -->
+    <div class="col-md-4">
+      <div class="card h-100 shadow-sm border-0">
+        <div class="card-body text-center">
+          <i class="fas fa-comment-dots fa-3x text-primary mb-3"></i>
+          <h5 class="fw-bold">Property Feedback</h5>
+          <p class="text-muted">Buyers can leave reviews and feedback on listed properties, helping others make informed decisions.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Query Handling -->
+    <div class="col-md-4">
+      <div class="card h-100 shadow-sm border-0">
+        <div class="card-body text-center">
+          <i class="fas fa-question-circle fa-3x text-primary mb-3"></i>
+          <h5 class="fw-bold">Query Handling</h5>
+          <p class="text-muted">Users can submit queries for any property, and agents/owners can respond directly through the platform.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Admin Management -->
+    <div class="col-md-4">
+      <div class="card h-100 shadow-sm border-0">
+        <div class="card-body text-center">
+          <i class="fas fa-cogs fa-3x text-primary mb-3"></i>
+          <h5 class="fw-bold">Admin Dashboard</h5>
+          <p class="text-muted">Admins can manage user data, property listings, and maintain the overall functionality of the platform.</p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- CTA -->
+<div class="bg-primary text-white py-5">
+  <div class="container text-center">
+    <h2 class="fw-bold mb-4">Want to Explore More?</h2>
+    <p class="lead mb-4">Register today and start discovering the best properties with LandSphere</p>
+    <a href="#" class="btn btn-light btn-lg px-4">Get Started</a>
+  </div>
+</div>
+
+{% endblock %}

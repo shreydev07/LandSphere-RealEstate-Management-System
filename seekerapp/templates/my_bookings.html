@@ -1,0 +1,39 @@
+{% extends 'seekerbase.html' %}
+{% block seeker %}
+<div class="container">
+  <h2 class="mt-4">My Booking Requests</h2>
+  <table class="table table-bordered table-striped mt-3">
+    <thead class="table-light">
+      <tr>
+        <th>Property</th>
+        <th>Status</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for booking in bookings %}
+      <tr>
+        <td>{{ booking.property.title }}</td>
+        <td>
+          {% if booking.status == 'Pending' %}
+            <span class="badge bg-warning">{{ booking.status }}</span>
+          {% elif booking.status == 'Accepted' %}
+            <span class="badge bg-success">{{ booking.status }}</span>
+          {% elif booking.status == 'Rejected' %}
+            <span class="badge bg-danger">{{ booking.status }}</span>
+          {% endif %}
+        </td>
+      </tr>
+      <tr>
+        <td>
+          {% if booking.status == "Accepted" %}
+  <a href="{% url 'seekerapp:booking_receipt' booking.id %}" class="btn btn-sm btn-success">View Receipt</a>
+        {% endif %}
+        </td>
+      </tr>
+      {% empty %}
+      <tr><td colspan="2" class="text-center">You have not made any bookings yet.</td></tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endblock %}

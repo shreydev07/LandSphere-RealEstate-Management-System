@@ -1,0 +1,53 @@
+{% extends "adminbase.html" %}
+{% block content %}
+  <h2>Total Approved Owners</h2>
+
+  <div style="margin-bottom: 20px;">
+    <h3>Total Approved Owners: {{ total_owners }}</h3>
+  </div>
+
+  <table border="1" cellpadding="10" cellspacing="0" style="width: 100%; border-collapse: collapse;">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Contact No</th>
+        <th>Address</th>
+        <th>Government ID Proof</th>
+        <th>Land Certificate</th>
+        <th>Profile Photo</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for owner in approved_owners %}
+        <tr>
+          <td>{{ owner.name }}</td>
+          <td>{{ owner.email }}</td>
+          <td>{{ owner.contact_no }}</td>
+          <td>{{ owner.address }}</td>
+          <td>
+            {% if owner.gov_id_proof %}
+              <a href="{{ owner.gov_id_proof.url }}" target="_blank">View</a>
+            {% else %}
+              N/A
+            {% endif %}
+          </td>
+          <td>
+            {% if owner.land_certificate %}
+              <a href="{{ owner.land_certificate.url }}" target="_blank">View</a>
+            {% else %}
+              N/A
+            {% endif %}
+          </td>
+          <td>
+            {% if owner.profile_photo %}
+              <a href="{{ owner.profile_photo.url }}" target="_blank">View</a>
+            {% else %}
+              N/A
+            {% endif %}
+          </td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+{% endblock %}

@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+{% load static %}
+{% block body %}
+
+<div style="max-width: 400px; margin: 80px auto; background: rgba(255, 255, 255, 0.95); padding: 30px; border-radius: 15px; box-shadow: 0 8px 20px rgba(0,0,0,0.2); animation: slideIn 1s ease; font-family: 'Segoe UI', sans-serif; background-image: url('{% static "images/login-bg.png" %}'); background-size: cover; background-position: center;">
+
+  <h2 style="text-align: center; margin-bottom: 30px; color: #2c3e50; font-weight: bold;">Login to LandSphere</h2>
+
+ 
+
+  <form method="POST" action="">
+    {% csrf_token %}
+
+    <!-- Email Input -->
+    <div style="margin-bottom: 15px;">
+      <label for="email" style="display: block; margin-bottom: 5px;">Email address</label>
+      <input type="email" name="email" required
+             style="width: 100%; padding: 10px; border-radius: 10px; border: 1px solid #ced4da;">
+    </div>
+
+    <!-- Password Input -->
+    <div style="margin-bottom: 15px;">
+      <label for="password" style="display: block; margin-bottom: 5px;">Password</label>
+      <input type="password" name="password" required
+             style="width: 100%; padding: 10px; border-radius: 10px; border: 1px solid #ced4da;">
+    </div>
+
+    <!-- Usertype Dropdown -->
+    <div style="margin-bottom: 25px;">
+      <label for="usertype" style="display: block; margin-bottom: 5px;">Select Usertype</label>
+      <select name="usertype" required
+              style="width: 100%; padding: 10px; border-radius: 10px; border: 1px solid #ced4da; transition: all 0.3s ease;">
+        <option value="">-- Choose Usertype --</option>
+        <option value="admin">Admin</option>
+        <option value="seeker">Seeker</option>
+        <option value="owner">Owner</option>
+      </select>
+    </div>
+
+    <!-- Submit Button -->
+    <button type="submit"
+            style="width: 100%; padding: 12px; border-radius: 10px; font-weight: bold; background: linear-gradient(to right, #007bff, #00bfff); color: white; border: none; cursor: pointer;">
+      Login
+    </button>
+  </form>
+
+</div>
+
+{% endblock %}

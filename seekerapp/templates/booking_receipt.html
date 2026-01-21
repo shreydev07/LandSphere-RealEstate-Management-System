@@ -1,0 +1,42 @@
+{% extends 'seekerbase.html' %}
+{% block seeker %}
+<div class="container mt-5">
+  <div class="card p-4 shadow" id="receipt-card">
+    <h3 class="text-center mb-4">Booking Confirmation Receipt</h3>
+    <p><strong>Seeker Name:</strong> {{ booking.seeker_name }}</p>
+    <p><strong>Seeker Email:</strong> {{ booking.seeker_email }}</p>
+    <p><strong>Property Title:</strong> {{ booking.property.title }}</p>
+    <p><strong>Property Location:</strong> {{ booking.property.location }}</p>
+    <p><strong>Booking Status:</strong> {{ booking.status }}</p>
+    <p><strong>Owner:</strong> {{ booking.property.owner.name }}</p>
+    <p><strong>Date:</strong> {{ booking.created_at|date:"M d, Y H:i" }}</p>
+
+    <div class="text-center mt-4">
+      <button class="btn btn-primary" onclick="window.print()">🖨️ Print / Save as PDF</button>
+    </div>
+  </div>
+</div>
+
+<style>
+@media print {
+  body * {
+    visibility: hidden !important;
+  }
+  #receipt-card, #receipt-card * {
+    visibility: visible !important;
+  }
+  #receipt-card {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    margin: 0;
+    box-shadow: none;
+  }
+  /* Hide the print button itself */
+  #receipt-card button {
+    display: none !important;
+  }
+}
+</style>
+{% endblock %}

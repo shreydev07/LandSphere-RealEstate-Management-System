@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+{% load static %}
+{% block body %}
+
+<!-- About Us Section -->
+<div class="py-5 bg-light">
+  <div class="container">
+    <div class="row align-items-center mb-5">
+      <div class="col-md-6">
+        <img src="{% static 'images/hero-about.png' %}" class="img-fluid rounded shadow" alt="About LandSphere" style="height: 80vh;">
+      </div>
+      <div class="col-md-6">
+        <h2 class="fw-bold mb-4">About LandSphere</h2>
+        <p class="text-muted">LandSphere is a visionary real estate platform that bridges the gap between buyers, sellers, agents, and owners across India and globally. Our goal is to simplify property transactions while offering a transparent, user-friendly, and visually engaging experience.</p>
+        <p class="text-muted">We believe in innovation, integrity, and customer satisfaction. Our platform supports everything from property listing and search to direct interaction and query handling, ensuring a seamless process for all users.</p>
+        <a href="#" class="btn btn-primary mt-3">Contact Us</a>
+      </div>
+    </div>
+
+    <div class="row text-center">
+      <div class="col-md-4 mb-4">
+        <div class="p-4 bg-white shadow rounded">
+          <i class="fas fa-flag-checkered fa-2x text-primary mb-3"></i>
+          <h5>Our Mission</h5>
+          <p class="text-muted">To revolutionize real estate with smart technology and unmatched customer experience.</p>
+        </div>
+      </div>
+      <div class="col-md-4 mb-4">
+        <div class="p-4 bg-white shadow rounded">
+          <i class="fas fa-eye fa-2x text-primary mb-3"></i>
+          <h5>Our Vision</h5>
+          <p class="text-muted">To become a globally trusted platform for seamless and secure property transactions.</p>
+        </div>
+      </div>
+      <div class="col-md-4 mb-4">
+        <div class="p-4 bg-white shadow rounded">
+          <i class="fas fa-users fa-2x text-primary mb-3"></i>
+          <h5>Our Team</h5>
+          <p class="text-muted">A group of passionate developers, designers, and real estate experts building the future of property tech.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Call to Action -->
+<div class="bg-primary text-white py-5">
+  <div class="container text-center">
+    <h2 class="fw-bold mb-4">Join LandSphere Today</h2>
+    <p class="lead mb-4">Experience smarter, faster, and safer property deals across India and beyond.</p>
+    <a href="#" class="btn btn-light btn-lg px-4">Get Started</a>
+  </div>
+</div>
+
+{% endblock %}

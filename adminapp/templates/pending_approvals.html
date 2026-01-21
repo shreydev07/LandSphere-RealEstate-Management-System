@@ -1,0 +1,129 @@
+{% extends "adminbase.html" %}
+{% block content %}
+  <h2>Pending Approval Requests</h2>
+  
+  <!-- Filter Section -->
+  <div style="margin-bottom:20px; text-align:center;">
+    <button id="filter_owner" onclick="filterRequests('owner')" style="padding:10px 20px; border:none; background:#00b09b; color:white; border-radius:5px; margin-right:10px;">Owner Approval</button>
+    <button id="filter_seeker" onclick="filterRequests('seeker')" style="padding:10px 20px; border:none; background:transparent; color:#333; border-radius:5px;">Seeker Approval</button>
+  </div>
+  
+  <!-- Owner Requests Container (default visible) -->
+  <div id="owner_container">
+    {% if owners %}
+      {% for owner in owners %}
+        <div class="card" style="border:1px solid #ccc; border-radius:10px; padding:15px; margin-bottom:15px;">
+          <h3>{{ owner.name }}</h3>
+          <p><strong>Email:</strong> {{ owner.email }}</p>
+          <p><strong>Contact No:</strong> {{ owner.contact_no }}</p>
+          <p><strong>Address:</strong> {{ owner.address }}</p>
+          <p>
+            <strong>Government ID Proof:</strong>
+            {% if owner.gov_id_proof %}
+              <a href="{{ owner.gov_id_proof.url }}" target="_blank">View</a>
+            {% else %}
+              N/A
+            {% endif %}
+          </p>
+          <p>
+            <strong>Bhulekh Land Certificate:</strong>
+            {% if owner.land_certificate %}
+              <a href="{{ owner.land_certificate.url }}" target="_blank">View</a>
+            {% else %}
+              N/A
+            {% endif %}
+          </p>
+          <p>
+            <strong>Profile Photo:</strong>
+            {% if owner.profile_photo %}
+              <a href="{{ owner.profile_photo.url }}" target="_blank">View</a>
+            {% else %}
+              N/A
+            {% endif %}
+          </p>
+          <div style="margin-top:10px;">
+            <form method="POST" action="{% url 'adminapp:update_approval' 'owner' owner.pk 'approve' %}" style="display:inline;">
+              {% csrf_token %}
+              <button type="submit" style="background:#00b09b; color:white; padding:5px 10px; border:none; border-radius:5px;">Approve</button>
+            </form>
+            <form method="POST" action="{% url 'adminapp:update_approval' 'owner' owner.pk 'reject' %}" style="display:inline; margin-left:10px;">
+              {% csrf_token %}
+              <button type="submit" style="background:#ff4b2b; color:white; padding:5px 10px; border:none; border-radius:5px;">Reject</button>
+            </form>
+          </div>
+        </div>
+      {% endfor %}
+    {% else %}
+      <p>No pending owner requests.</p>
+    {% endif %}
+  </div>
+  
+  <!-- Seeker Requests Container (hidden by default) -->
+  <div id="seeker_container" style="display:none;">
+    {% if seekers %}
+      {% for seeker in seekers %}
+        <div class="card" style="border:1px solid #ccc; border-radius:10px; padding:15px; margin-bottom:15px;">
+          <h3>{{ seeker.name }}</h3>
+          <p><strong>Email:</strong> {{ seeker.email }}</p>
+          <p><strong>Contact No:</strong> {{ seeker.contact_no }}</p>
+          <p>
+            <strong>ID Proof:</strong>
+            {% if seeker.id_proof %}
+              <a href="{{ seeker.id_proof.url }}" target="_blank">View</a>
+            {% else %}
+              N/A
+            {% endif %}
+          </p>
+          <p>
+            <strong>Profile Photo:</strong>
+            {% if seeker.photo %}
+              <a href="{{ seeker.photo.url }}" target="_blank">View</a>
+            {% else %}
+              N/A
+            {% endif %}
+          </p>
+          <div style="margin-top:10px;">
+            <form method="POST" action="{% url 'adminapp:update_approval' 'seeker' seeker.pk 'approve' %}" style="display:inline;">
+              {% csrf_token %}
+              <button type="submit" style="background:#00b09b; color:white; padding:5px 10px; border:none; border-radius:5px;">Approve</button>
+            </form>
+            <form method="POST" action="{% url 'adminapp:update_approval' 'seeker' seeker.pk 'reject' %}" style="display:inline; margin-left:10px;">
+              {% csrf_token %}
+              <button type="submit" style="background:#ff4b2b; color:white; padding:5px 10px; border:none; border-radius:5px;">Reject</button>
+            </form>
+          </div>
+        </div>
+      {% endfor %}
+    {% else %}
+      <p>No pending seeker requests.</p>
+    {% endif %}
+  </div>
+
+  <!-- JS for Filtering -->
+  <script>
+    function filterRequests(type) {
+      if (type === 'owner') {
+        document.getElementById('owner_container').style.display = 'block';
+        document.getElementById('seeker_container').style.display = 'none';
+        // Highlight only the selected button
+        document.getElementById('filter_owner').style.background = '#00b09b';
+        document.getElementById('filter_owner').style.color = 'white';
+        document.getElementById('filter_seeker').style.background = 'transparent';
+        document.getElementById('filter_seeker').style.color = '#333';
+      } else if (type === 'seeker') {
+        document.getElementById('owner_container').style.display = 'none';
+        document.getElementById('seeker_container').style.display = 'block';
+        // Highlight only the selected button
+        document.getElementById('filter_seeker').style.background = '#00b09b';
+        document.getElementById('filter_seeker').style.color = 'white';
+        document.getElementById('filter_owner').style.background = 'transparent';
+        document.getElementById('filter_owner').style.color = '#333';
+      }
+    }
+
+    // By default, show owner requests when the page loads.
+    window.onload = function() {
+      filterRequests('owner');
+    }
+  </script>
+{% endblock %}

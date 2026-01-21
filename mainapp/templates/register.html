@@ -1,0 +1,375 @@
+{% extends "base.html" %}
+{% load static %}
+{% block body %}
+
+<div style="min-height: 100vh; background-image: url('{% static 'images/land-bg.png' %}'); background-size: cover; background-position: center; display: flex; justify-content: center; align-items: center; padding: 50px;">
+  <div style="max-width: 800px; width: 100%; background: linear-gradient(135deg, #ffffffcc, #f1f1f1cc); padding: 32px; border-radius: 15px; box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2); font-family: 'Segoe UI', sans-serif;">
+    <h2 style="text-align: center; margin-bottom: 20px; font-weight: bold; color: #2c3e50;">Register on LandSphere</h2>
+
+    <div style="text-align: center;">
+      <button class="tab-button active" onclick="showPanel('owner')">As Owner</button>
+      <button class="tab-button" onclick="showPanel('seeker')">As Seeker</button>
+    </div>
+
+    <!-- Owner Form -->
+    <div id="owner-form" class="form-panel active">
+      <form method="POST" action="{% url 'owner_registration' %}" enctype="multipart/form-data" onsubmit="return validateForm('owner')">
+        {% csrf_token %}
+        <div class="form-row">
+          <div class="form-col">
+            <label>Full Name</label>
+            <input type="text" id="owner_name" name="name" required placeholder="Full Name">
+            <div class="input-error" id="owner_name_error"></div>
+          </div>
+          <div class="form-col">
+            <label>Email Address</label>
+            <input type="email" id="owner_email" name="email" required placeholder="Email Address">
+            <div class="input-error" id="owner_email_error"></div>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-col">
+            <label>Contact Number</label>
+            <input type="text" id="owner_contact_no" name="contact_no" required placeholder="Contact Number">
+            <div class="input-error" id="owner_contact_no_error"></div>
+          </div>
+          <div class="form-col">
+            <label>Password</label>
+            <input type="password" id="owner_password" name="password" required placeholder="Password">
+            <div class="input-error" id="owner_password_error"></div>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-col">
+            <label>Confirm Password</label>
+            <input type="password" id="owner_confirm_password" name="confirm_password" required placeholder="Confirm Password">
+            <div class="input-error" id="owner_confirm_password_error"></div>
+          </div>
+          <div class="form-col">
+            <label>Government ID Proof</label>
+            <input type="file" id="owner_gov_id_proof" name="gov_id_proof" required>
+            <div class="input-error" id="owner_gov_id_proof_error"></div>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-col">
+            <label>Bhulekh Land Certificate</label>
+            <input type="file" id="owner_land_certificate" name="land_certificate" required>
+            <div class="input-error" id="owner_land_certificate_error"></div>
+          </div>
+          <div class="form-col">
+            <label>Profile Photo</label>
+            <input type="file" id="owner_profile_photo" name="profile_photo" required>
+            <div class="input-error" id="owner_profile_photo_error"></div>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-col" style="flex:2;">
+            <label>Address</label>
+            <textarea id="owner_address" name="address" required placeholder="Address" rows="2"></textarea>
+            <div class="input-error" id="owner_address_error"></div>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-col" style="flex:2;">
+            <label>Enter the CAPTCHA below:</label>
+            <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 8px;">
+              <input type="text" id="captcha_display_owner" readonly style="font-weight: bold; border: none; background-color: #eee; padding: 8px; letter-spacing: 2px; width: 110px;">
+              <button type="button" onclick="generateCaptcha('owner')" style="padding: 5px 10px;">↻</button>
+            </div>
+            <input type="text" id="captcha_input_owner" placeholder="Enter CAPTCHA" required>
+            <div class="input-error" id="owner_captcha_error"></div>
+          </div>
+        </div>
+        <button type="submit" style="width: 100%; padding: 10px; margin-top: 10px; background: linear-gradient(to right, #00b09b, #96c93d); color: white; border: none; border-radius: 8px;">Register as Owner</button>
+      </form>
+    </div>
+
+    <!-- Seeker Form -->
+    <div id="seeker-form" class="form-panel">
+      <form method="POST" action="{% url 'seeker_registration' %}" enctype="multipart/form-data" onsubmit="return validateForm('seeker')">
+        {% csrf_token %}
+        <div class="form-row">
+          <div class="form-col">
+            <label>Full Name</label>
+            <input type="text" id="seeker_name" name="name" required placeholder="Full Name">
+            <div class="input-error" id="seeker_name_error"></div>
+          </div>
+          <div class="form-col">
+            <label>Email Address</label>
+            <input type="email" id="seeker_email" name="email" required placeholder="Email Address">
+            <div class="input-error" id="seeker_email_error"></div>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-col">
+            <label>Contact Number</label>
+            <input type="text" id="seeker_contact_no" name="contact_no" required placeholder="Contact Number">
+            <div class="input-error" id="seeker_contact_no_error"></div>
+          </div>
+          <div class="form-col">
+            <label>Password</label>
+            <input type="password" id="seeker_password" name="password" required placeholder="Password">
+            <div class="input-error" id="seeker_password_error"></div>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-col">
+            <label>Confirm Password</label>
+            <input type="password" id="seeker_confirm_password" name="confirm_password" required placeholder="Confirm Password">
+            <div class="input-error" id="seeker_confirm_password_error"></div>
+          </div>
+          <div class="form-col">
+            <label>Profile Photo</label>
+            <input type="file" id="seeker_profile_photo" name="profile_photo" required>
+            <div class="input-error" id="seeker_profile_photo_error"></div>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-col" style="flex:2;">
+            <label>Address</label>
+            <textarea id="seeker_address" name="address" required placeholder="Address" rows="2"></textarea>
+            <div class="input-error" id="seeker_address_error"></div>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-col" style="flex:2;">
+            <label>Enter the CAPTCHA below:</label>
+            <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 8px;">
+              <input type="text" id="captcha_display_seeker" readonly style="font-weight: bold; border: none; background-color: #eee; padding: 8px; letter-spacing: 2px; width: 110px;">
+              <button type="button" onclick="generateCaptcha('seeker')" style="padding: 5px 10px;">↻</button>
+            </div>
+            <input type="text" id="captcha_input_seeker" placeholder="Enter CAPTCHA" required>
+            <div class="input-error" id="seeker_captcha_error"></div>
+          </div>
+        </div>
+        <button type="submit" style="width: 100%; padding: 10px; margin-top: 10px; background: linear-gradient(to right, #00b09b, #96c93d); color: white; border: none; border-radius: 8px;">Register as Seeker</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<style>
+.form-row {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 10px;
+}
+.form-col {
+  flex: 1;
+  min-width: 0;
+}
+input, textarea {
+  width: 100%;
+  padding: 10px;
+  border: 2px solid #ddd;
+  border-radius: 8px;
+  font-size: 14px;
+  transition: all 0.3s;
+  margin-bottom: 0;
+}
+label {
+  margin-bottom: 4px;
+  font-size: 13px;
+  font-weight: 600;
+  color: #2c3e50;
+}
+.input-error {
+  color: #e74c3c;
+  font-size: 12px;
+  margin-top: 2px;
+  padding: 4px 8px;
+  background-color: #fde8e8;
+  border-radius: 4px;
+  display: none;
+  font-weight: 500;
+  border-left: 3px solid #e74c3c;
+}
+.input-invalid {
+  border-color: #e74c3c !important;
+  background-color: #fff6f6 !important;
+}
+input:focus, textarea:focus {
+  outline: none;
+  border-color: #3498db !important;
+  box-shadow: 0 0 5px rgba(52, 152, 219, 0.2) !important;
+}
+.tab-button {
+  margin: 10px 5px;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 20px;
+  background-color: #ddd;
+  color: #333;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.tab-button.active {
+  background-color: #3498db;
+  color: white;
+}
+.form-panel { display: none; }
+.form-panel.active { display: block; }
+</style>
+
+<script>
+function showPanel(panel) {
+  document.getElementById('owner-form').classList.remove('active');
+  document.getElementById('seeker-form').classList.remove('active');
+  const buttons = document.querySelectorAll('.tab-button');
+  buttons.forEach(btn => btn.classList.remove('active'));
+  if (panel === 'owner') {
+    document.getElementById('owner-form').classList.add('active');
+    buttons[0].classList.add('active');
+  } else {
+    document.getElementById('seeker-form').classList.add('active');
+    buttons[1].classList.add('active');
+  }
+}
+
+function generateCaptcha(role) {
+  const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+  let captcha = '';
+  for (let i = 0; i < 6; i++) {
+    captcha += chars.charAt(Math.floor(Math.random() * chars.length));
+  }
+  document.getElementById(`captcha_display_${role}`).value = captcha;
+}
+
+// Validate a single field (for real-time feedback)
+function validateField(role, field) {
+  let valid = true;
+  let input = document.getElementById(`${role}_${field}`);
+  let errorId = `${role}_${field}_error`;
+  let value = input && input.type !== "file" ? input.value.trim() : (input && input.value);
+
+  // Clear previous error
+  if (input) {
+    input.classList.remove('input-invalid');
+    document.getElementById(errorId).style.display = 'none';
+    document.getElementById(errorId).textContent = '';
+  }
+
+  // Validation logic per field
+  if (field === 'name') {
+    if (!value) {
+      showError(input, errorId, "Full Name is required.");
+      valid = false;
+    } else if (!/^[A-Za-z\s]+$/.test(value)) {
+      showError(input, errorId, "Only letters and spaces allowed.");
+      valid = false;
+    }
+  }
+  if (field === 'email') {
+    if (!value) {
+      showError(input, errorId, "Email is required.");
+      valid = false;
+    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)) {
+      showError(input, errorId, "Enter a valid email address.");
+      valid = false;
+    }
+  }
+  if (field === 'contact_no') {
+    if (!value) {
+      showError(input, errorId, "Contact Number is required.");
+      valid = false;
+    } else if (!/^\d{10}$/.test(value)) {
+      showError(input, errorId, "Enter a valid 10-digit mobile number.");
+      valid = false;
+    }
+  }
+  if (field === 'password') {
+    if (!value) {
+      showError(input, errorId, "Password is required.");
+      valid = false;
+    } else if (value.length < 8) {
+      showError(input, errorId, "Password must be at least 8 characters.");
+      valid = false;
+    }
+  }
+  if (field === 'confirm_password') {
+    let password = document.getElementById(`${role}_password`).value;
+    if (!value) {
+      showError(input, errorId, "Please confirm your password.");
+      valid = false;
+    } else if (value !== password) {
+      showError(input, errorId, "Passwords do not match.");
+      valid = false;
+    }
+  }
+  if (field === 'gov_id_proof' || field === 'land_certificate' || field === 'profile_photo') {
+    if (input && !input.value) {
+      showError(input, errorId, "This file is required.");
+      valid = false;
+    }
+  }
+  if (field === 'address') {
+    if (!value) {
+      showError(input, errorId, "Address is required.");
+      valid = false;
+    } else if (value.length < 5) {
+      showError(input, errorId, "Address should be at least 5 characters.");
+      valid = false;
+    }
+  }
+  if (field === 'captcha') {
+    let captchaDisplay = document.getElementById(`captcha_display_${role}`).value;
+    if (!value) {
+      showError(input, errorId, "CAPTCHA is required.");
+      valid = false;
+    } else if (value !== captchaDisplay) {
+      showError(input, errorId, "CAPTCHA does not match.");
+      valid = false;
+    }
+  }
+  return valid;
+}
+
+// Validate all fields on submit
+function validateForm(role) {
+  let valid = true;
+  const fields = role === 'owner'
+    ? ['name', 'email', 'contact_no', 'password', 'confirm_password', 'gov_id_proof', 'land_certificate', 'profile_photo', 'address', 'captcha']
+    : ['name', 'email', 'contact_no', 'password', 'confirm_password', 'profile_photo', 'address', 'captcha'];
+  fields.forEach(field => {
+    if (!validateField(role, field)) valid = false;
+  });
+  return valid;
+}
+
+function showError(input, errorId, message) {
+  const errorDiv = document.getElementById(errorId);
+  if (errorDiv) {
+    errorDiv.textContent = message;
+    errorDiv.style.display = 'block';
+    if (input) input.classList.add('input-invalid');
+  }
+}
+
+// Real-time validation only for the field being edited
+document.addEventListener('DOMContentLoaded', function() {
+  ['owner', 'seeker'].forEach(role => {
+    const fields = role === 'owner'
+      ? ['name', 'email', 'contact_no', 'password', 'confirm_password', 'gov_id_proof', 'land_certificate', 'profile_photo', 'address', 'captcha']
+      : ['name', 'email', 'contact_no', 'password', 'confirm_password', 'profile_photo', 'address', 'captcha'];
+    fields.forEach(field => {
+      const input = document.getElementById(`${role}_${field}`);
+      if (input) {
+        input.addEventListener(input.type === 'file' ? 'change' : 'input', function() {
+          validateField(role, field);
+        });
+        if (input.type !== 'file') {
+          input.addEventListener('blur', function() {
+            validateField(role, field);
+          });
+        }
+      }
+    });
+  });
+  generateCaptcha('owner');
+  generateCaptcha('seeker');
+});
+</script>
+
+{% endblock %}

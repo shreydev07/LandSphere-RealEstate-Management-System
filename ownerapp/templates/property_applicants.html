@@ -1,0 +1,31 @@
+{% extends 'ownerbase.html' %}
+{% block owner %}
+<div class="container">
+  <h2 class="mt-4">Applicants for "{{ property.title }}"</h2>
+  <table class="table table-bordered table-striped mt-3">
+    <thead class="table-light">
+      <tr>
+        <th>Seeker Name</th>
+        <th>Email</th>
+        <th>Contact</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for req in requests %}
+      <tr>
+        <td>{{ req.seeker_name }}</td>
+        <td>{{ req.seeker_email }}</td>
+        <td>{{ req.seeker_contact }}</td>
+        <td>
+          <a href="{% url 'ownerapp:accept_request' property.property_id req.id %}" class="btn btn-success btn-sm">Accept</a>
+          <a href="{% url 'ownerapp:reject_request' property.property_id req.id %}" class="btn btn-danger btn-sm">Reject</a>
+        </td>
+      </tr>
+      {% empty %}
+      <tr><td colspan="4" class="text-center">No pending booking requests.</td></tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endblock %}

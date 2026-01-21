@@ -1,0 +1,45 @@
+{% extends "adminbase.html" %}
+{% block content %}
+  <h2>Total Approved Seekers</h2>
+
+  <div style="margin-bottom: 20px;">
+    <h3>Total Approved Seekers: {{ total_seekers }}</h3>
+  </div>
+
+  <table border="1" cellpadding="10" cellspacing="0" style="width: 100%; border-collapse: collapse;">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Contact No</th>
+        <th>Address</th>
+        <th>ID Proof</th>
+        <th>Profile Photo</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for seeker in approved_seekers %}
+        <tr>
+          <td>{{ seeker.name }}</td>
+          <td>{{ seeker.email }}</td>
+          <td>{{ seeker.contact_no }}</td>
+          <td>{{ seeker.address }}</td>
+          <td>
+            {% if seeker.id_proof %}
+              <a href="{{ seeker.id_proof.url }}" target="_blank">View</a>
+            {% else %}
+              N/A
+            {% endif %}
+          </td>
+          <td>
+            {% if seeker.photo %}
+              <a href="{{ seeker.photo.url }}" target="_blank">View</a>
+            {% else %}
+              N/A
+            {% endif %}
+          </td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+{% endblock %}

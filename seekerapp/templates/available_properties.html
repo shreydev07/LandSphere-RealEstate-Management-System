@@ -1,0 +1,25 @@
+{% extends 'seekerbase.html' %}
+{% block seeker %}
+<div class="container">
+  <h2 class="text-center mt-4">Available Properties</h2>
+  <div class="row mt-3">
+    {% for property in properties %}
+    <div class="col-md-6 col-lg-4 mb-4">
+      <div class="card shadow-sm">
+        <img src="{{ property.images.url }}" class="card-img-top" style="height: 220px; object-fit: cover;" alt="{{ property.title }}">
+        <div class="card-body">
+          <h5 class="card-title">{{ property.title }}</h5>
+          <p class="card-text">{{ property.location }}</p>
+          <p><strong>Price:</strong> ₹{{ property.price }}</p>
+          {% if property.property_id in booked_property_ids %}
+            <button class="btn btn-secondary w-100" disabled>Booking Applied</button>
+          {% else %}
+            <a href="{% url 'seekerapp:book_property' property.property_id %}" class="btn btn-primary w-100">Book Now</a>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</div>
+{% endblock %}
